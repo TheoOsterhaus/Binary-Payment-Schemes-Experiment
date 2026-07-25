@@ -1,0 +1,691 @@
+\documentclass[
+    11pt,
+    a4paper,
+    parskip=half,
+    headings=normal
+]{scrartcl}
+
+% ======================================================================
+% Encoding, fonts and language
+% ======================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ======================================================================
+% Page layout
+% ======================================================================
+\usepackage[
+    a4paper,
+    margin=2.5cm,
+    headheight=17pt
+]{geometry}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{3em}
+
+% ======================================================================
+% Colours and appearance
+% ======================================================================
+\usepackage{xcolor}
+
+\definecolor{econblue}{RGB}{0,70,140}
+\definecolor{econlight}{RGB}{230,240,255}
+\definecolor{econgray}{RGB}{90,90,90}
+\definecolor{econline}{RGB}{190,205,225}
+
+\addtokomafont{disposition}{\color{econblue}}
+
+\setkomafont{title}{
+    \normalfont
+    \sffamily
+    \bfseries
+    \color{econblue}
+}
+
+\setkomafont{subtitle}{
+    \normalfont
+    \sffamily
+    \large
+    \color{econgray}
+}
+
+\setkomafont{author}{
+    \normalfont
+    \sffamily
+    \large
+}
+
+\setkomafont{date}{
+    \normalfont
+    \sffamily
+    \color{econgray}
+}
+
+\setkomafont{section}{
+    \normalfont
+    \sffamily
+    \bfseries
+    \color{econblue}
+}
+
+\setkomafont{subsection}{
+    \normalfont
+    \sffamily
+    \bfseries
+    \color{econblue}
+}
+
+\setkomafont{subsubsection}{
+    \normalfont
+    \sffamily
+    \bfseries
+    \color{econblue}
+}
+
+% ======================================================================
+% Header and footer
+% ======================================================================
+\usepackage{scrlayer-scrpage}
+
+\clearpairofpagestyles
+
+\ihead{\small\textsf{Theo Osterhaus}}
+\ohead{\small\textsf{Behavioural Research in Climate Policy}}
+
+\cfoot{\pagemark}
+
+\setkomafont{pagehead}{\normalfont\small}
+\setkomafont{pagenumber}{\normalfont\small\bfseries\color{econblue}}
+
+\KOMAoptions{
+    headsepline=true,
+    footsepline=false
+}
+
+\setkomafont{headsepline}{\color{econline}}
+
+\pagestyle{scrheadings}
+
+% ======================================================================
+% Mathematics
+% ======================================================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{physics}
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% ======================================================================
+% Figures, tables and lists
+% ======================================================================
+\usepackage{graphicx}
+\graphicspath{
+    {Figures/}
+    {Figures and Tables/}
+    {plots/}
+}
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+\setlist[itemize]{
+    topsep=4pt,
+    itemsep=3pt,
+    parsep=0pt,
+    partopsep=0pt,
+    leftmargin=1.5em
+}
+
+\setlist[enumerate]{
+    topsep=4pt,
+    itemsep=3pt,
+    parsep=0pt,
+    partopsep=0pt,
+    leftmargin=1.8em
+}
+
+\sisetup{
+    detect-all,
+    round-mode=places,
+    round-precision=2
+}
+
+\captionsetup{
+    font=small,
+    labelfont={bf,color=econblue},
+    textfont=it,
+    justification=centering,
+    skip=8pt
+}
+
+% ======================================================================
+% Bibliography, hyperlinks and references
+% ======================================================================
+\usepackage{csquotes}
+
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    sorting=nty,
+    maxcitenames=2,
+    maxbibnames=10
+]{biblatex}
+
+\addbibresource{references.bib}
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=econblue,
+    urlcolor=econblue,
+    citecolor=econblue,
+    pdfstartview=FitH
+]{hyperref}
+
+\usepackage{bookmark}
+\usepackage{cleveref}
+
+% ======================================================================
+% Key message box
+% ======================================================================
+\usepackage[most]{tcolorbox}
+
+\tcbset{
+    enhanced,
+    breakable,
+    colframe=econblue,
+    colback=econlight,
+    coltitle=white,
+    fonttitle=\bfseries,
+    boxrule=0.8pt,
+    arc=2pt,
+    left=8pt,
+    right=8pt,
+    top=7pt,
+    bottom=7pt
+}
+
+\newenvironment{keymessage}[1][Key Message]{%
+    \begin{tcolorbox}[title=#1]%
+}{%
+    \end{tcolorbox}%
+}
+
+% ======================================================================
+% Metadata
+% ======================================================================
+\newcommand{\shorttitle}{Moral Hazard and Loss Aversion}
+
+\title{Binary Payment Schemes:\\[0.3em]
+Moral Hazard and Loss Aversion}
+
+\subtitle{\cite{Herweg2010}\\[0.3em]
+Experiment}
+
+\author{Theo Osterhaus, 7443693}
+
+\date{Seminar Market Design and Behaviour, SuSe 2026}
+
+% ======================================================================
+% Document
+% ======================================================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\label{sec:abstract}
+
+It addresses 
+
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+% ======================================================================
+% 1. Summary of the Focal Paper
+% ======================================================================
+\section{Research Question}
+\label{sec:Research Question}
+
+The optimal contract is a binary payment scheme even for a rich performance measure, where standard preferences predict a fully contingent contract.
+
+Does an expectation-based reference point lead agents to exert more effort under binary contracts than under finely graded (multi-level) contracts—and is this loss-aversion effect more pronounced in multi-level contracts when interacting with the reference point level?
+
+% ----------------------------------------------------------------------
+\section{Sample}
+
+% ----------------------------------------------------------------------
+\section{Design}
+
+\subsection{Contract Structure: Between-subject}
+
+\begin{itemize}
+
+    \item Problem with within-design: If he has experienced the maximum wage—say, 20 €—once in Block 1, that amount may “stick” in his mind as a reference point. In a binary contract with a maximum wage of 15 €, he may then perceive 15 € as a loss, even though it is the best possible outcome under the terms of that contract.
+
+    \item \textbf{Between-subject:} Cleaner identification
+
+\end{itemize}
+
+No experiment is perfect. I deliberately sacrifice power and intra-subject comparisons because clearly identifying the reference-point-based mechanism is a priority for my research question. I mitigate the remaining drawbacks through multiple rounds, covariates, and stratified randomisation.
+
+\vspace{0.5cm}
+
+\subsection*{Reference Point Manipulation}
+
+The reference point = rational expectations regarding one's own wage distribution
+
+\begin{itemize}
+
+    \item Is the effect actually driven by the expectation-based reference point?
+
+    \item Manipulating by variety in the success probabilities
+
+    \item High Expectations: "In this task, most participants achieve the high reward
+
+    \item Low Expectations: “In this task, only a few will earn the high reward.”
+
+    \item Another Option: Manipulation Through Feedback/Experience in Early Rounds or Belief Elicitation
+
+    \item Use Belief Elicitation as a manipulation Check
+
+\end{itemize}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Experimental Conditions}
+    \label{tab:experimental_conditions}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{0.28\textwidth}
+                    >{\centering\arraybackslash}p{0.28\textwidth}
+                    >{\centering\arraybackslash}p{0.28\textwidth}}
+        \toprule
+        &
+        \textbf{Ref.-punkt: Hoch} &
+        \textbf{Ref.-punkt: Niedrig} \\
+        \midrule
+        \textbf{Binärer Vertrag}
+        & Gruppe 1
+        & Gruppe 2 \\
+
+        \textbf{Multi-Level-Vertrag}
+        & Gruppe 3
+        & Gruppe 4 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection*{Central Prediction}
+
+The difference in effort between the reference point conditions should be greater in the multilevel contract than in the binary contract (because the binary contract minimizes feelings of loss anyway).This interaction is precisely your key finding.
+
+\medskip
+
+BUT Number of cases: 2×2 means more cells → Power requirements increase
+
+\vspace{0.5cm}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparison of Payment Mechanisms}
+    \label{tab:payment_mechanisms}
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{
+        >{\raggedright\arraybackslash}p{0.22\textwidth}
+        >{\centering\arraybackslash}p{0.16\textwidth}
+        >{\centering\arraybackslash}p{0.13\textwidth}
+        >{\centering\arraybackslash}p{0.10\textwidth}
+        >{\raggedright\arraybackslash}X
+    }
+        \toprule
+        \textbf{Mechanism}
+        & \textbf{Wealth effect}
+        & \textbf{Hedging}
+        & \textbf{Power}
+        & \textbf{Suitability for loss aversion} \\
+        \midrule
+
+        Random-round payment
+        & Avoided
+        & Avoided
+        & Good
+        & \textbf{Best choice} \\
+
+        Cumulative payment
+        & Present
+        & Possible
+        & Good
+        & Problematic \\
+
+        Single-round payment
+        & Avoided
+        & Avoided
+        & Weak
+        & Theoretically ideal, but costly \\
+
+        Average payment
+        & Present
+        & Strong
+        & Good
+        & Dampens the effect \\
+
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+I use the random-round payment method because it eliminates wealth and hedging effects—both of which would distort the perception of loss aversion, which is at the heart of my research question. Cumulative and average payment methods allow for smoothing across rounds and are therefore unsuitable; a single-round design would be the cleanest approach, but it would cost too much statistical power.
+
+% ----------------------------------------------------------------------
+\subsection{Grundidee}
+
+Das Hybrid-Design kombiniert die theoretische Präzision der Chosen-Effort-Aufgabe mit der externen Validität einer Real-Effort-Aufgabe.
+
+% ----------------------------------------------------------------------
+\subsubsection{Aufbau: Variante B -- Within-Robustheitsblock}
+
+\begin{itemize}
+
+    \item \textbf{Hauptexperiment:} Chosen-Effort-Task mit bekannter, konvexer Kostenfunktion
+    \[
+        c(e) = 2\gamma e^2,
+    \]
+    die präzise und quantitative Tests der theoretischen Vorhersagen ermöglicht.
+
+    \item \textbf{Robustheitsblock:} Kurzer Real-Effort-Block (Slider-Task nach Gill und Prat, 2012) im selben Vertrags- und Referenzpunkt-Setup zur Prüfung der externen Validität.
+
+    \item \textbf{Gleiche Teilnehmer in beiden Teilen:} Dadurch ist keine zusätzliche Fallzahl erforderlich.
+
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\subsubsection{Zweck}
+
+Das Design soll zeigen, dass der Loss-Aversion-Effekt nicht vom künstlichen Charakter der Chosen-Effort-Aufgabe abhängt:
+
+\begin{itemize}
+
+    \item \textbf{Chosen-Effort:} Die Kostenfunktion $c(e)$ ist bekannt, sodass eine quantitative Prüfung der theoretischen Vorhersagen möglich ist.
+
+    \item \textbf{Real-Effort:} Die Kostenfunktion $c(e)$ ist unbekannt, sodass lediglich die qualitative Richtung des Effekts geprüft werden kann.
+
+\end{itemize}
+
+Wenn beide Aufgaben dieselbe Richtung des Effekts zeigen, spricht dies dafür, dass der Effekt gegenüber der Operationalisierung von Effort robust ist.
+
+% ----------------------------------------------------------------------
+\subsubsection{Warum eine Slider-Task?}
+
+\begin{itemize}
+
+    \item Fähigkeitsunterschiede werden nahezu vollständig eliminiert, sodass reine Anstrengung gemessen wird.
+
+    \item Die Lernkurve ist flach, und der Output kann präzise erfasst werden.
+
+    \item Die in Kauf genommenen Nachteile -- geringe externe Validität und moderate Ermüdung -- sind im Kontext eines Robustheitstests unkritisch beziehungsweise wirken sich symmetrisch auf alle Between-Gruppen aus.
+
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\subsubsection{Kosten der Entscheidung}
+
+Die folgenden Einschränkungen sollten transparent benannt werden:
+
+\begin{itemize}
+
+    \item Reihenfolgeeffekte durch die Abfolge \textit{Chosen-Effort} $\rightarrow$ \textit{Real-Effort};
+
+    \item mögliche Ermüdung der Teilnehmer;
+
+    \item der Robustheitsblock stellt lediglich einen ``Proof of Concept'' für externe Validität dar und keinen vollständigen Test.
+
+\end{itemize}
+
+Ein vollständiger Test würde das kostenintensivere $2 \times 2 \times 2$-Between-Subjects-Design (Variante A) erfordern.
+
+% ----------------------------------------------------------------------
+\subsection*{Effort Type}
+
+\begin{itemize}
+    \item Real effort vs.\ chosen effort
+    \item Option: include both as a robustness check
+\end{itemize}
+
+\vspace{0.5cm}
+
+% ----------------------------------------------------------------------
+\subsection*{Sample \& Location}
+
+\begin{itemize}
+    \item Cologne Laboratory (CLER)
+    \item Target sample size: $n \approx 240\text{--}320$
+    \item Power considerations can be provided
+\end{itemize}
+
+\vspace{0.5cm}
+
+% ----------------------------------------------------------------------
+\subsection*{Principal Role}
+
+\begin{itemize}
+    \item Option 1: Exogenous wages (set by experimenter)
+    \item Option 2: Real principals
+    \item Recommendation: Exogenous contracts to eliminate fairness/reciprocity effects (Fehr et al.)
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\section{Analysis}
+
+\subsection{Hypotheses}
+The hypotheses are derived directly from the theoretical predictions in Herweg et al.\ (2010) and the expectation-based reference-point model of K\H{o}szegi and Rabin (2006).
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}clp{4.5cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Hypothesis} & \textbf{Rationale} \\
+\midrule
+H1 & Effort under the binary contract $\geq$ effort under the multi-level contract & Binary contract minimises expected sensation of loss \\
+H2 & Higher reference point $\rightarrow$ higher effort (within a contract type) & Expectation-based reference point \\
+H3 & The effort difference between reference-point conditions is \emph{larger} under the multi-level contract than under the binary contract & Interaction effect (key prediction) \\
+\bottomrule
+\end{tabular}
+\caption{Hypotheses}
+\label{tab:hypotheses}
+\end{table}
+
+\noindent\textbf{H3 is the central finding} of this design---the interaction term.
+
+\subsection{Main Specification}
+The main regression is estimated as:
+\begin{equation}
+e_{i} = \beta_0 + \beta_1 \text{MultiLevel}_i + \beta_2 \text{HighRef}_i
++ \beta_3 \left(\text{MultiLevel}_i \times \text{HighRef}_i\right) + X_i'\gamma + \varepsilon_i
+\end{equation}
+
+\noindent\textbf{Interpretation of coefficients:}
+\begin{itemize}
+    \item $\beta_1$ --- contract-type main effect (H1);
+    \item $\beta_2$ --- reference-point effect within the binary contract (H2);
+    \item $\beta_3$ --- \textbf{key test (H3)}: is the reference-point effect larger under the multi-level contract?
+    \item $X_i$ --- covariates (risk preference, loss-aversion score, gender, semester).
+\end{itemize}
+
+\noindent\textbf{Estimation:}
+\begin{itemize}
+    \item Multiple rounds per subject $\rightarrow$ panel structure with standard errors clustered at the individual level;
+    \item Alternatively, a random-effects model (rounds nested within subjects).
+\end{itemize}
+
+\subsection{Manipulation Check}
+This step is central to identification; without it the mechanism is not credible.
+\begin{itemize}
+    \item \textbf{Belief elicitation:} elicit the expected winning probability/reward \emph{before} the effort decision;
+    \item \textbf{Test:} do the elicited beliefs differ significantly between the high- and low-reference-point groups?
+    \[
+        \rightarrow \text{$t$-test / Mann--Whitney on the belief variable.}
+    \]
+    \item \textbf{If yes:} the manipulation worked $\rightarrow$ the reference point was indeed shifted;
+    \item \textbf{Bonus:} use the belief as a \emph{continuous mediator} rather than only the group dummy $\rightarrow$ cleaner test of the expectation-based mechanism.
+\end{itemize}
+\subsection{Belief Elicitation Procedure}
+The manipulation check relies on an incentive-compatible measurement of the
+agent's expectation-based reference point.
+
+\paragraph{Object of elicitation.}
+Prior to the effort decision, we elicit the subjective probability
+$\hat{p}_i \in [0,1]$ of obtaining the high wage, and (optionally) the
+expected wage $\hat{w}_i$ as an aggregate measure of the reference point.
+
+\paragraph{Method: Matching Probabilities (crossover).}
+To avoid the confound between belief measurement and the very preferences
+under study (loss/risk aversion), we do \emph{not} use a Quadratic Scoring
+Rule, which is only incentive-compatible under risk neutrality. Instead,
+subjects choose repeatedly between:
+\begin{itemize}
+    \item \textbf{Option A:} a bonus paid if they actually reach the high wage;
+    \item \textbf{Option B:} a bonus paid with an objective probability $q$
+    (an explicit lottery).
+\end{itemize}
+The probability $q$ is varied systematically; the crossover point
+$q^\ast = \hat{p}_i$ identifies the subject's subjective probability.
+This estimate is robust to risk and loss preferences.
+
+\paragraph{Incentivisation.}
+Only one round is randomly selected for payment (random-round mechanism,
+consistent with the main design), avoiding wealth and hedging effects
+across belief and effort tasks.
+
+\paragraph{Use in the analysis.}
+\begin{itemize}
+    \item \textbf{Manipulation check:} test whether $\hat{p}_i$ differs
+    between the high- and low-reference-point groups
+    ($t$-test / Mann--Whitney);
+    \item \textbf{Mediation:} use $\hat{p}_i$ as a continuous mediator
+    between the treatment dummy and effort, providing a direct test of the
+    expectation-based mechanism.
+\end{itemize}
+
+\paragraph{Timing caveat.}
+Belief elicitation is placed \emph{before} the effort choice so that the
+elicited belief reflects the reference point governing the subsequent
+decision. A drawback is potential anchoring: eliciting the belief may itself
+make the reference point salient. As a robustness check, a between-subjects
+subsample can omit the elicitation to verify that the treatment effect on
+effort persists without it.
+
+\subsection{Robustness Block (Slider Task)}
+Since the cost function $c(e)$ is \emph{unknown} here, only a \textbf{qualitative directional test} is possible.
+\begin{itemize}
+    \item Same regression, with the dependent variable = number of correctly positioned sliders;
+    \item \textbf{Success criterion:} does $\beta_3$ show the \emph{same sign} as in the chosen-effort part?
+    \item \textbf{No} quantitative comparison of effect sizes (different scales);
+    \item Order (chosen $\rightarrow$ real) included as a control dummy to absorb order effects.
+\end{itemize}
+
+\subsection{Power Analysis}
+\begin{itemize}
+    \item \textbf{Target quantity:} the interaction effect $\beta_3$ (smallest detectable effect);
+    \item Interactions require \emph{more power} than main effects $\rightarrow$ hence $n \approx 240\text{--}320$;
+    \item \textbf{For the slide:} e.g.\ for a medium effect (Cohen's $f^2 \approx 0.06$), $\alpha = 0.05$, power $= 0.80$ $\rightarrow$ required sample size per cell;
+    \item Multiple rounds per subject \emph{increase} the effective power (more observations).
+\end{itemize}
+
+\subsection{Additional Robustness Analyses}
+\begin{itemize}
+    \item \textbf{Learning/fatigue effects:} round number as a control; plot effort over time;
+    \item \textbf{Heterogeneity:} interaction with the individual loss-aversion score (e.g.\ from a separate lottery measurement);
+    \item \textbf{Attrition/outliers:} treatment rule (e.g.\ slider $= 0$ interpreted as refusal).
+\end{itemize}
+
+% ----------------------------------------------------------------------
+\section{Instructions}
+
+\subsection{Experimental Instructions}
+The instructions are designed to be neutral, context-free, and
+incentive-transparent, following standard practice in experimental economics
+(e.g.\ no deception, no value-laden wording).
+
+\paragraph{General principles.}
+\begin{itemize}
+    \item \textbf{Neutral language:} we avoid loaded terms such as
+    ``loss'', ``punish'', or ``fair''; roles are labelled neutrally
+    (e.g.\ ``Person A''/``Person B'') to prevent unintended framing;
+    \item \textbf{No deception:} all stated probabilities and payment rules
+    are implemented exactly as described;
+    \item \textbf{Reference-point manipulation stays implicit:} the
+    high/low reference-point conditions are induced through the
+    \emph{structure} of the information (communicated success probabilities,
+    displayed past outcomes), never through explicit statements about what
+    subjects ``should expect''.
+\end{itemize}
+
+\paragraph{Structure of the instructions.}
+\begin{enumerate}
+    \item \textbf{Welcome and general rules:} anonymity, no communication,
+    duration ($\approx$ 45--60 min), payment in points converted to euros;
+    \item \textbf{Description of the task:} the effort/slider decision and
+    how it maps into outcomes;
+    \item \textbf{Contract explanation:} depending on treatment, either the
+    binary or the multi-level payment scheme, presented in a neutral payoff
+    table;
+    \item \textbf{Reference-point information:} treatment-specific
+    information block (implicit manipulation);
+    \item \textbf{Belief-elicitation instructions:} explanation of the
+    matching-probabilities task and its incentivisation;
+    \item \textbf{Payment mechanism:} random-round selection; one round is
+    drawn for payment.
+\end{enumerate}
+
+\paragraph{Comprehension check.}
+Before the paid rounds begin, subjects answer a set of
+\textbf{control questions} covering (i) how their payoff is determined under
+their contract, (ii) how the belief task is paid, and (iii) the
+random-round mechanism. The experiment proceeds only once all questions are
+answered correctly; incorrect answers trigger an on-screen explanation.
+
+\paragraph{Practice round.}
+One unpaid practice round familiarises subjects with the interface
+(e.g.\ the slider task and the belief screen) before real decisions start.
+
+\paragraph{Screen-based implementation.}
+The experiment is programmed in \textit{oTree} and conducted in the
+Cologne Laboratory for Economic Research (CLER). Instructions appear
+on screen and are additionally read aloud (or provided on paper) to ensure
+common knowledge of the rules.
+
+% ======================================================================
+% References
+% ======================================================================
+\newpage
+
+\pagenumbering{Roman}
+
+\printbibliography
+
+\end{document}
