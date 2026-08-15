@@ -1,0 +1,19 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bcf
+*.run.xml
+
+# R files
+.Rhistory
+.RData
+
+# Build output
+output/

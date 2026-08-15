@@ -1,0 +1,76 @@
+name: Build LaTeX PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "main.tex"
+      - "references.bib"
+      - "figures/**"
+      - ".github/workflows/build-pdf.yml"
+  pull_request:
+    paths:
+      - "main.tex"
+      - "references.bib"
+      - "figures/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v6
+
+      - name: Prüfen, dass nur main.tex und references.bib vorhanden sind
+        run: |
+          set -euo pipefail
+          tex_files=$(find . -name "*.tex" -not -path "./.git/*")
+          bib_files=$(find . -name "*.bib" -not -path "./.git/*")
+          tex_count=$(echo "$tex_files" | grep -c . || true)
+          bib_count=$(echo "$bib_files" | grep -c . || true)
+
+          if [ "$tex_count" -ne 1 ] || [ "$tex_files" != "./main.tex" ]; then
+            echo "::error::Es darf nur eine Datei 'main.tex' im Projekt geben."
+            exit 1
+          fi
+
+          if [ "$bib_count" -ne 1 ] || [ "$bib_files" != "./references.bib" ]; then
+            echo "::error::Es darf nur eine Datei 'references.bib' im Projekt geben."
+            exit 1
+          fi
+
+      - name: LaTeX-Dokument kompilieren
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          compiler: latexmk
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -verbose -recorder
+          os: debian
+
+      - name: PDF umbenennen
+        run: mv main.pdf praesentation.pdf
+
+      - name: PDF als Workflow-Artefakt hochladen
+        uses: actions/upload-artifact@v6
+        with:
+          name: presentation-pdf
+          path: praesentation.pdf
+          retention-days: 30
+
+      - name: Release erstellen und PDF anhängen
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Aktuelle Präsentation"
+          body: |
+            Automatisch generiert aus Commit ${{ github.sha }}
+            Datum: ${{ github.event.head_commit.timestamp }}
+          files: praesentation.pdf
+          make_latest: true
